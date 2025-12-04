@@ -127,7 +127,7 @@ export class AuthService {
 	// Método simplificado para buscar dados do usuário
 	getMe(): Observable<iUser> {
 		return this.http.get<iUser>(`${this.API_URL}/me`, {
-			withCredentials: true
+			withCredentials: true 
 		}).pipe(
 			tap(user => this.currentUserSubject.next(user)),
 			catchError(error => {

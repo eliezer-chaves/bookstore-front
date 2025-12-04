@@ -60,7 +60,7 @@ declare const google: any;
 	templateUrl: './create-account.page.component.html',
 	styleUrl: './create-account.page.component.css'
 })
-export class CreateAccountPageComponent implements OnInit, AfterViewInit {
+export class CreateAccountPageComponent implements OnInit {
 	@ViewChild('telInput') telInput!: IntlTelInputComponent;
 	minLenghtPassword: number = environment.passwordMinLenght
 
@@ -305,23 +305,23 @@ export class CreateAccountPageComponent implements OnInit, AfterViewInit {
 	}
 
 	// MÉTODO CORRIGIDO: Configuração do GSI para o modo Client-Driven
-	ngAfterViewInit(): void {
-		setTimeout(() => {
-			if (typeof google !== 'undefined' && google.accounts?.id) {
-				google.accounts.id.initialize({
-					client_id: "776175008574-7uveb1rst7tr3d66sa1sftjnqgdafkmr.apps.googleusercontent.com",
-					// CORREÇÃO: Usar 'popup' e 'callback' para forçar o Angular a fazer o POST
-					ux_mode: "popup", 
-					context: "signup",
-					callback: this.handleCredentialResponse.bind(this),
-					// REMOVIDA A PROPRIEDADE login_uri
-				});
+	// ngAfterViewInit(): void {
+	// 	setTimeout(() => {
+	// 		if (typeof google !== 'undefined' && google.accounts?.id) {
+	// 			google.accounts.id.initialize({
+	// 				client_id: "776175008574-7uveb1rst7tr3d66sa1sftjnqgdafkmr.apps.googleusercontent.com",
+	// 				// CORREÇÃO: Usar 'popup' e 'callback' para forçar o Angular a fazer o POST
+	// 				ux_mode: "popup", 
+	// 				context: "signup",
+	// 				callback: this.handleCredentialResponse.bind(this),
+	// 				// REMOVIDA A PROPRIEDADE login_uri
+	// 			});
 
-				google.accounts.id.renderButton(
-					document.getElementById("g_id_signin_button"),
-					{ theme: "outline", size: "large", type: "standard", shape: "rectangular" }
-				);
-			}
-		}, 200);
-	}
+	// 			google.accounts.id.renderButton(
+	// 				document.getElementById("g_id_signin_button"),
+	// 				{ theme: "outline", size: "large", type: "standard", shape: "rectangular" }
+	// 			);
+	// 		}
+	// 	}, 200);
+	// }
 }
